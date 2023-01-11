@@ -1,0 +1,8 @@
+node_modules
+
+# JS Doc
+/doc
+
+# Parcel
+.parcel-cache
+/dist

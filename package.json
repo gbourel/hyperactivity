@@ -6,9 +6,12 @@
   "license": "AGPL-3.0",
   "author": "GB <gbourel@gmail.com>",
   "devDependencies": {
-    "parcel": "^2.8.2"
+    "parcel": "^2.8.2",
+    "jsdoc": "^4.0.0"
   },
   "scripts": {
+    "build": "npm run doc && npx parcel build src/index.html",
+    "doc": "jsdoc -c jsdoc.json",
     "start": "npx parcel src/index.html"
   },
   "dependencies": {
