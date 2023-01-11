@@ -6,8 +6,10 @@
   "license": "AGPL-3.0",
   "author": "GB <gbourel@gmail.com>",
   "devDependencies": {
+    "parcel": "^2.8.2"
   },
   "scripts": {
+    "start": "npx parcel src/index.html"
   },
   "dependencies": {
   }
