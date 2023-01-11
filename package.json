@@ -1,0 +1,14 @@
+{
+  "name": "hyperactivity",
+  "version": "0.0.1",
+  "private": false,
+  "description": "",
+  "license": "AGPL-3.0",
+  "author": "GB <gbourel@gmail.com>",
+  "devDependencies": {
+  },
+  "scripts": {
+  },
+  "dependencies": {
+  }
+}
