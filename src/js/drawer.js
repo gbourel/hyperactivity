@@ -143,6 +143,9 @@ export function Drawer(container, paint, state, options = { playable: true }) {
   window.addEventListener("load", this.on_resize, true);
 }
 
+/**
+ * Affiche un slider permettant l'interaction avec l'affichage.
+ */
 export function Slider(
   container_div,
   callback,

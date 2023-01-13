@@ -10,6 +10,19 @@ function genericTouchHandler(f) {
   };
 }
 
+export function loadImage(url) {
+  let obj = {
+    loaded: false,
+    img: new Image(),
+  };
+  obj.img.onload = () => {
+    obj.loaded = true;
+  };
+  obj.img.src = url;
+  return obj;
+}
+
+
 function download_file(file_path, handler) {
   let xhr = new XMLHttpRequest();
   xhr.open("GET", file_path);
@@ -253,133 +266,6 @@ window.SegmentedControl = function (container_div, callback, values) {
     }
 
     if (e.preventDefault) e.preventDefault();
-    return true;
-  }
-};
-
-window.Slider = function (
-  container_div,
-  callback,
-  style_prefix,
-  default_value,
-  disable_click,
-) {
-  let container = document.createElement("div");
-  container.style.width = "100%";
-  container.style.height = "0";
-  container.style.position = "relative";
-  container.classList.add("slider_container");
-  if (style_prefix) container.classList.add(style_prefix + "slider_container");
-
-  let left_gutter = document.createElement("div");
-  left_gutter.classList.add("slider_left_gutter");
-  if (style_prefix)
-    left_gutter.classList.add(style_prefix + "slider_left_gutter");
-
-  let right_gutter = document.createElement("div");
-  right_gutter.classList.add("slider_right_gutter");
-  if (style_prefix)
-    right_gutter.classList.add(style_prefix + "slider_right_gutter");
-
-  if (!disable_click) {
-    left_gutter.onclick = mouse_click;
-    right_gutter.onclick = mouse_click;
-  }
-
-  let knob_container = document.createElement("div");
-  knob_container.style.width = "0";
-  knob_container.style.height = "0";
-  knob_container.style.top = "0";
-  knob_container.style.position = "absolute";
-
-  let knob = document.createElement("div");
-  knob.classList.add("slider_knob");
-  if (style_prefix) knob.classList.add(style_prefix + "slider_knob");
-
-  container_div.appendChild(container);
-  container.appendChild(left_gutter);
-  container.appendChild(right_gutter);
-  container.appendChild(knob_container);
-  knob_container.appendChild(knob);
-
-  window.addEventListener("resize", layout, true);
-  window.addEventListener("load", layout, true);
-
-  this.dragged = false;
-  let self = this;
-
-  let percentage = default_value === undefined ? 0.5 : default_value;
-
-  layout();
-  callback(percentage);
-
-  this.set_value = function (p) {
-    percentage = p;
-    layout();
-  };
-
-  this.knob_div = function () {
-    return knob;
-  };
-
-  function layout() {
-    let width = container.getBoundingClientRect().width;
-
-    left_gutter.style.width = width * percentage + "px";
-    left_gutter.style.left = "0";
-
-    right_gutter.style.width = width * (1.0 - percentage) + "px";
-    right_gutter.style.left = width * percentage + "px";
-
-    knob_container.style.left = width * percentage + "px";
-  }
-
-  let selection_offset;
-
-  new TouchHandler(
-    knob,
-    function (e) {
-      if (window.bc_touch_down_state) return false;
-
-      e == e || window.event;
-      let knob_rect = knob_container.getBoundingClientRect();
-      selection_offset = e.clientX - knob_rect.left - knob_rect.width / 2;
-
-      self.dragged = true;
-
-      return true;
-    },
-    function (e) {
-      let container_rect = container.getBoundingClientRect();
-      let x = e.clientX - selection_offset - container_rect.left;
-
-      let p = saturate(x / container_rect.width);
-
-      if (percentage != p) {
-        percentage = p;
-        layout();
-        callback(p);
-      }
-
-      return true;
-    },
-    function (e) {
-      self.dragged = false;
-    },
-  );
-
-  function mouse_click(e) {
-    let container_rect = container.getBoundingClientRect();
-    let x = e.clientX - container_rect.left;
-
-    let p = Math.max(0, Math.min(1.0, x / container_rect.width));
-
-    if (percentage != p) {
-      percentage = p;
-      layout();
-      callback(p);
-    }
-
     return true;
   }
 };

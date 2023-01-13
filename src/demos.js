@@ -42,10 +42,10 @@ new Slider(createDiv(mainElt), function (x) {
     demo1.repaint(); // not playable, force redraw
 });
 
-// // Engrenages
+// Engrenages
 new Drawer(createDrawerContainer(mainElt), gears_demo);
 
-// // Ventilateur
+// Ventilateur
 let fanState = {
     speed: 0.5,  // Current rotation speed
     angle: 0     // Current fan angle
