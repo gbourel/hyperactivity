@@ -2,7 +2,7 @@
 
 ## Documentation
 
-TODO, voir JSDOC pour l'instant (`npm run doc`).
+TODO, docusaurus voir JSDOC pour l'instant (`npm run doc`).
 
 ## Mise en place
 

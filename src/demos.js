@@ -1,6 +1,6 @@
 import { Drawer, Slider } from "./js/drawer.js";
 import { draw_gear, draw_driver, draw_fan } from './js/gears.js';
-import { draw_car_top, draw_car_back, draw_cone_top, draw_cone_back } from './js/car.js';
+import { draw_car_top, draw_car_side, draw_car_back, draw_cone_top, draw_cone_back } from './js/car.js';
 
 const fill0 = "#FCD561";
 const fill1 = "#78AD6C";
@@ -115,7 +115,7 @@ function car_demo(ctx, width, height, t, state) {
       ctx.save();
       ctx.translate(-110 + d, 0);
       ctx.rotate(Math.PI * 0.5);
-      draw_car_top(ctx)
+      draw_car_top(ctx);
       ctx.restore();
 
       ctx.translate(-240, 70);

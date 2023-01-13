@@ -551,6 +551,1108 @@ export function draw_car_top(ctx, color = "#1243A5") {
 }
 
 /**
+ * Dessine une voiture vu de coté.
+ * @param {object} ctx - Context canvas 2D
+ * @param {float} angle - Angle de rotation des roues (en radians)
+ * @param {boolean} flash - Rear lights On/Off
+ * @param {string} color - Car color (defaults to blue, #1243A5)
+ */
+export function draw_car_side(ctx, angle = 0, flash = false, color = '#1243A5') {
+  ctx.save();
+
+  ctx.translate(-90, -380);
+  ctx.scale( 1.8, 1.8);
+
+  /// Main car background
+  ctx.save();
+  ctx.fillStyle = color;
+  ctx.strokeStyle = "#434343";
+  ctx.lineWidth = 0.13229167;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.beginPath();
+  ctx.bezierCurveTo(
+    42.532791,
+    227.23314,
+    54.974666,
+    228.34295,
+    54.790252,
+    228.57899999999998,
+  );
+  ctx.lineTo(74.835466, 229.45908999999997);
+  ctx.lineTo(139.52006, 229.64807999999996);
+  ctx.lineTo(163.16804, 230.04897999999997);
+  ctx.bezierCurveTo(
+    166.95082,
+    229.38433999999998,
+    173.36766,
+    228.67481999999998,
+    174.37666,
+    228.04445999999996,
+  );
+  ctx.bezierCurveTo(
+    174.91047999999998,
+    227.76865999999995,
+    174.91447,
+    216.95358999999996,
+    173.70848999999998,
+    215.08188999999996,
+  );
+  ctx.bezierCurveTo(
+    172.50576999999998,
+    213.21099999999996,
+    166.51966,
+    210.67193999999995,
+    160.63973,
+    209.46922999999995,
+  );
+  ctx.bezierCurveTo(
+    154.75979999999998,
+    208.26650999999995,
+    130.02661999999998,
+    205.05927999999994,
+    130.02661999999998,
+    205.05927999999994,
+  );
+  ctx.bezierCurveTo(
+    130.02661999999998,
+    205.05927999999994,
+    119.20220999999998,
+    198.64480999999995,
+    109.31323999999998,
+    196.10574999999994,
+  );
+  ctx.bezierCurveTo(
+    99.42426399999998,
+    193.56668999999994,
+    86.11067399999997,
+    193.57752999999994,
+    77.25163899999998,
+    195.16493999999994,
+  );
+  ctx.bezierCurveTo(
+    68.24812899999998,
+    196.77822999999995,
+    51.98392199999998,
+    204.38035999999994,
+    51.98392199999998,
+    204.38035999999994,
+  );
+  ctx.bezierCurveTo(
+    47.50536699999998,
+    204.96123999999995,
+    38.906115999999976,
+    205.17442999999994,
+    38.54825599999998,
+    206.12298999999993,
+  );
+  ctx.lineTo(37.55136699999998, 208.12212999999994);
+  ctx.bezierCurveTo(
+    37.52177699999998,
+    209.59210999999993,
+    37.74655999999998,
+    211.06209999999993,
+    37.33267799999998,
+    212.53207999999995,
+  );
+  ctx.bezierCurveTo(
+    36.19966499999998,
+    213.31221999999994,
+    34.97500999999998,
+    214.19973999999996,
+    34.47776799999998,
+    215.47203999999996,
+  );
+  ctx.bezierCurveTo(
+    34.405577999999984,
+    217.15014999999997,
+    34.336711999999984,
+    219.08696999999995,
+    34.61140099999999,
+    220.69454999999996,
+  );
+  ctx.bezierCurveTo(
+    35.11816299999999,
+    222.24788999999996,
+    36.18972699999998,
+    224.55139999999997,
+    37.21727999999999,
+    225.60562999999996,
+  );
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.save();
+  ctx.fillStyle = "rgba(0,0,0,0)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(158.51376, 215.9241);
+  ctx.lineTo(167.01823, 215.19178000000002);
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "rgba(0,0,0,0)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.lineCap = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(43.502696, 208.64806);
+  ctx.bezierCurveTo(
+    77.291328,
+    209.08982999999998,
+    110.36103,
+    210.02349999999998,
+    141.76469,
+    212.09709999999998,
+  );
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "rgba(0,0,0,0)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(42.394756, 210.35841);
+  ctx.bezierCurveTo(
+    42.394756,
+    210.35841,
+    44.299922,
+    213.6119,
+    45.70309,
+    213.87917,
+  );
+  ctx.bezierCurveTo(
+    47.106255000000004,
+    214.14643999999998,
+    58.465209,
+    214.31349,
+    58.465209,
+    214.31349,
+  );
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+
+
+  /// REAR BRAKE
+
+  ctx.save();
+  ctx.fillStyle = "#ae0000";
+  ctx.fillStyle = "rgba(174, 0, 0, 1)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(37.380097, 208.34065);
+  ctx.lineTo(38.270088, 206.66369);
+  ctx.lineTo(42.191593, 206.64009000000001);
+  ctx.bezierCurveTo(
+    42.191593,
+    206.64009000000001,
+    42.475072999999995,
+    206.59279,
+    42.947544,
+    207.23068,
+  );
+  ctx.bezierCurveTo(
+    43.420014,
+    207.86851000000001,
+    43.585378,
+    208.31736,
+    43.585378,
+    208.31736,
+  );
+  ctx.lineTo(42.654046, 208.31136);
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+
+  /// Reverse light
+  ctx.save();
+  ctx.fillStyle = flash ? "#DDDDDD" : "#666666";
+  ctx.strokeStyle = "#434343";
+  ctx.lineWidth = 0.13229167;
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(37.386003, 208.31112);
+  ctx.lineTo(37.447993000000004, 210.36785999999998);
+  ctx.bezierCurveTo(
+    38.764659,
+    210.49438999999998,
+    38.839811000000005,
+    210.39005999999998,
+    42.418381000000004,
+    210.40565999999998,
+  );
+  ctx.bezierCurveTo(
+    42.418381000000004,
+    210.40565999999998,
+    43.744564000000004,
+    208.52957999999998,
+    43.585382,
+    208.31733999999997,
+  );
+  ctx.lineTo(37.386007000000006, 208.31133999999997);
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+
+  /// Blinkers
+  ctx.save();
+  ctx.fillStyle = "#fd911c";
+  ctx.fillStyle = "rgba(253, 145, 28, 1)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(37.244263, 212.5917);
+  ctx.bezierCurveTo(
+    37.646370999999995,
+    211.64758,
+    37.434833,
+    210.90955,
+    37.447993999999994,
+    210.36786,
+  );
+  ctx.bezierCurveTo(
+    38.76465999999999,
+    210.49439,
+    38.839811999999995,
+    210.39006,
+    42.418381999999994,
+    210.40566,
+  );
+  ctx.bezierCurveTo(
+    40.631916999999994,
+    212.66627,
+    37.244263,
+    212.5917,
+    37.244263,
+    212.5917,
+  );
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#fd911c";
+  ctx.fillStyle = "rgba(253, 145, 28, 1)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(141.9773, 211.57738);
+  ctx.bezierCurveTo(
+    142.71767000000003,
+    211.57738,
+    143.49227000000002,
+    211.59828000000002,
+    144.19791,
+    211.62458,
+  );
+  ctx.bezierCurveTo(
+    144.56834,
+    211.63838,
+    144.80458000000002,
+    212.72525000000002,
+    144.43415000000002,
+    212.71127,
+  );
+  ctx.lineTo(141.93006000000003, 212.61677);
+  ctx.bezierCurveTo(
+    141.58349,
+    212.60367,
+    141.63044000000002,
+    211.57738,
+    141.97726000000003,
+    211.57738,
+  );
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#fd911c";
+  ctx.fillStyle = "rgba(253, 145, 28, 1)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(161.63124, 211.34011);
+  ctx.lineTo(165.50664999999998, 211.84124);
+  ctx.lineTo(165.3062, 214.24667);
+  ctx.bezierCurveTo(
+    163.96689999999998,
+    213.73506,
+    162.79605999999998,
+    212.54963999999998,
+    161.63124,
+    211.34010999999998,
+  );
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+
+  /// Front light
+  ctx.save();
+  ctx.fillStyle = "#666666";
+  ctx.fillStyle = "rgba(102, 102, 102, 1)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(165.50665, 211.84124);
+  ctx.bezierCurveTo(
+    165.50665,
+    211.84124,
+    169.5491,
+    212.94373,
+    170.91886,
+    214.3469,
+  );
+  ctx.bezierCurveTo(
+    172.28862,
+    215.75006000000002,
+    172.25521,
+    216.71891,
+    172.25521,
+    216.71891,
+  );
+  ctx.lineTo(168.44662, 216.71891);
+  ctx.bezierCurveTo(
+    168.44662,
+    216.71891,
+    168.31297999999998,
+    216.15097,
+    167.07685999999998,
+    215.41597,
+  );
+  ctx.bezierCurveTo(
+    165.84073999999998,
+    214.68097999999998,
+    165.3062,
+    214.24667,
+    165.3062,
+    214.24667,
+  );
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.save();
+  ctx.fillStyle = "rgba(0, 0, 0, 1)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(93.226482, 195.98586);
+  ctx.lineTo(94.683034, 205.86049);
+  ctx.bezierCurveTo(
+    85.37537,
+    205.61244,
+    68.437467,
+    205.25854999999999,
+    66.76004300000001,
+    205.02185,
+  );
+  ctx.lineTo(65.24813900000001, 202.74218);
+  ctx.bezierCurveTo(
+    65.24813900000001,
+    202.74218,
+    64.809319,
+    201.8578,
+    65.01190500000001,
+    201.37202,
+  );
+  ctx.bezierCurveTo(
+    65.21200900000001,
+    200.89219,
+    66.51199600000001,
+    199.89555,
+    68.23651100000001,
+    199.30496,
+  );
+  ctx.bezierCurveTo(
+    69.961027,
+    198.71437,
+    73.61917100000001,
+    197.56907999999999,
+    78.382812,
+    196.97804,
+  );
+  ctx.bezierCurveTo(
+    83.288694,
+    196.36936,
+    93.226482,
+    195.98586,
+    93.226482,
+    195.98586,
+  );
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "rgba(0, 0, 0, 1)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(95.749306, 195.93871);
+  ctx.lineTo(97.787238, 206.06153999999998);
+  ctx.lineTo(128.12233, 206.86334999999997);
+  ctx.bezierCurveTo(
+    119.29016,
+    201.09591999999998,
+    109.96451,
+    196.32310999999996,
+    95.749306,
+    195.93870999999996,
+  );
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.save();
+  ctx.fillStyle = "rgba(0, 0, 0, 1)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(74.839284, 229.484);
+  ctx.lineTo(74.69754400000001, 222.49144);
+  ctx.bezierCurveTo(
+    74.46863,
+    220.60107000000002,
+    72.16100600000001,
+    212.93794000000003,
+    63.358258000000006,
+    213.04204000000001,
+  );
+  ctx.bezierCurveTo(
+    51.78345,
+    213.17893,
+    50.60156200000001,
+    227.83035,
+    50.60156200000001,
+    227.83035,
+  );
+  ctx.lineTo(54.79025200000001, 228.579);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+
+  /// Rear wheel
+  ctx.save();
+  ctx.fillStyle = "#0000FF";
+  ctx.translate(63.64172, 224.14511);
+  ctx.rotate(angle);
+  ctx.font = "  400 15px ''";
+  ctx.save();
+  ctx.fillStyle = "#3c3d3b";
+  ctx.strokeStyle = "#434343";
+  ctx.lineWidth = 0.13229166;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.arc(0, 0, 9.9691219, 0, 6.283185307179586, false);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#c2ccdd";
+  ctx.strokeStyle = "#434343";
+  ctx.lineWidth = 0.13229166;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.arc(0, 0, 7.0870533, 0, 6.283185307179586, false);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#323232";
+  ctx.fillStyle = "rgba(50, 50, 50, 1)";
+  ctx.strokeStyle = "rgba(0,0,0,0)";
+  ctx.lineWidth = 0.10170905;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.rotate(1.5911440384397622);
+  ctx.beginPath();
+  ctx.moveTo(0,0);
+  ctx.rotate(0);
+  ctx.arc(0, 0, 5.448699, 4.721575831697883e-7, 0.8468934008293014, 0);
+  ctx.lineTo(0,0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#323232";
+  ctx.fillStyle = "rgba(50, 50, 50, 1)";
+  ctx.strokeStyle = "rgba(0,0,0,0)";
+  ctx.lineWidth = 0.10170905;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.rotate(2.803385892730985);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.arc(0, 0, 5.448699, -4.0288286908256607e-7, 0.8468929109402825, 0);
+  ctx.lineTo(0, 0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#323232";
+  ctx.fillStyle = "rgba(50, 50, 50, 1)";
+  ctx.strokeStyle = "rgba(0,0,0,0)";
+  ctx.lineWidth = 0.10170905;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.rotate(-2.1441221507763917);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.arc(0, 0, 5.448699, 2.8817474254688297e-7, 0.8468934003764788, 0);
+  ctx.lineTo(0, 0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#323232";
+  ctx.fillStyle = "rgba(50, 50, 50, 1)";
+  ctx.strokeStyle = "rgba(0,0,0,0)";
+  ctx.lineWidth = 0.10170905;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.rotate(0.3656406488931104);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.arc(0, 0, 5.448699, -7.884953353001449e-8, 0.8468934004122871, 0);
+  ctx.lineTo(0, 0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#323232";
+  ctx.fillStyle = "rgba(50, 50, 50, 1)";
+  ctx.strokeStyle = "rgba(0,0,0,0)";
+  ctx.lineWidth = 0.10170905;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.rotate(-0.8644360443458348);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.arc(0, 0, 5.448699, -7.884953353001449e-8, 0.8468934004122884, 0);
+  ctx.lineTo(0, 0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.fillStyle = "#c2ccdd";
+  ctx.strokeStyle = "#434343";
+  ctx.lineWidth = 0.03590516;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.arc(0, 0, 1.9234908, 0, 6.283185307179586, false);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.restore();
+
+  ctx.save();
+  ctx.fillStyle = "rgba(0, 0, 0, 1)";
+  ctx.strokeStyle = "#000000";
+  ctx.strokeStyle = "rgba(0, 0, 0, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(163.16804, 230.04898);
+  ctx.lineTo(162.80379, 224.61756);
+  ctx.bezierCurveTo(
+    163.03118999999998,
+    224.27647,
+    162.20243,
+    213.98188,
+    152.13540999999998,
+    213.56175,
+  );
+  ctx.bezierCurveTo(
+    138.67001,
+    213.84524,
+    139.75669999999997,
+    229.5785,
+    139.75669999999997,
+    229.5785,
+  );
+  ctx.lineTo(163.16803999999996, 230.04898);
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+
+  /// Front wheel
+  ctx.save();
+  ctx.font = "  400 15px ''";
+  ctx.translate(88.175755, 0);
+  ctx.translate(63.64172, 224.14511);
+  ctx.rotate(angle);
+  ctx.save();
+  ctx.fillStyle = "#3c3d3b";
+  ctx.fillStyle = "rgba(60, 61, 59, 1)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229166;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.arc(0, 0, 9.9691219, 0, 6.283185307179586, false);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#c2ccdd";
+  ctx.fillStyle = "rgba(194, 204, 221, 1)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229166;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.arc(0, 0, 7.0870533, 0, 6.283185307179586, false);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#323232";
+  ctx.fillStyle = "rgba(50, 50, 50, 1)";
+  ctx.strokeStyle = "rgba(0,0,0,0)";
+  ctx.lineWidth = 0.10170905;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.rotate(1.5911440384397622);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.arc(0, 0, 5.448699, 4.721575831697883e-7, 0.8468934008293014, 0);
+  ctx.lineTo(0, 0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#323232";
+  ctx.fillStyle = "rgba(50, 50, 50, 1)";
+  ctx.strokeStyle = "rgba(0,0,0,0)";
+  ctx.lineWidth = 0.10170905;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.rotate(2.803385892730985);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.arc(0, 0, 5.448699, -4.0288286908256607e-7, 0.8468929109402825, 0);
+  ctx.lineTo(0, 0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#323232";
+  ctx.fillStyle = "rgba(50, 50, 50, 1)";
+  ctx.strokeStyle = "rgba(0,0,0,0)";
+  ctx.lineWidth = 0.10170905;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.rotate(-2.1441221507763917);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.arc(0, 0, 5.448699, 2.8817474254688297e-7, 0.8468934003764788, 0);
+  ctx.lineTo(0, 0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#323232";
+  ctx.fillStyle = "rgba(50, 50, 50, 1)";
+  ctx.strokeStyle = "rgba(0,0,0,0)";
+  ctx.lineWidth = 0.10170905;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.rotate(0.3656406488931104);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.arc(0, 0, 5.448699, -7.884953353001449e-8, 0.8468934004122871, 0);
+  ctx.lineTo(0, 0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#323232";
+  ctx.fillStyle = "rgba(50, 50, 50, 1)";
+  ctx.strokeStyle = "rgba(0,0,0,0)";
+  ctx.lineWidth = 0.10170905;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.rotate(-0.8644360443458348);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.arc(0, 0, 5.448699, -7.884953353001449e-8, 0.8468934004122884, 0);
+  ctx.lineTo(0, 0);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#c2ccdd";
+  ctx.fillStyle = "rgba(194, 204, 221, 1)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.03590516;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.arc(0, 0, 1.9234908, 0, 6.283185307179586, false);
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.restore();
+
+  ctx.save();
+  ctx.fillStyle = "rgba(0, 0, 0, 1)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(173.0186, 221.45201);
+  ctx.lineTo(173.10209999999998, 225.69327);
+  ctx.bezierCurveTo(
+    173.10209999999998,
+    225.65287,
+    170.22007,
+    226.16898,
+    169.38341999999997,
+    226.00442,
+  );
+  ctx.bezierCurveTo(
+    168.54677999999998,
+    225.83987000000002,
+    168.72769999999997,
+    224.19659000000001,
+    168.72769999999997,
+    224.19659000000001,
+  );
+  ctx.bezierCurveTo(
+    168.72769999999997,
+    224.19659000000001,
+    168.76969999999997,
+    223.3581,
+    170.04537999999997,
+    222.17692000000002,
+  );
+  ctx.bezierCurveTo(
+    171.32104999999996,
+    221.43006000000003,
+    173.01857999999996,
+    221.45201000000003,
+    173.01857999999996,
+    221.45201000000003,
+  );
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "rgba(0,0,0,0)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(174.56041, 219.89274);
+  ctx.bezierCurveTo(
+    174.56041,
+    219.89274,
+    170.88545,
+    219.99296,
+    170.15045999999998,
+    220.22683,
+  );
+  ctx.bezierCurveTo(
+    169.41546999999997,
+    220.46069,
+    167.77844,
+    221.86385,
+    167.51117,
+    222.49862000000002,
+  );
+  ctx.bezierCurveTo(
+    167.24391,
+    223.13338000000002,
+    166.67596,
+    226.40743,
+    167.84526,
+    227.27606000000003,
+  );
+  ctx.bezierCurveTo(
+    169.01457,
+    228.14469000000003,
+    174.5103,
+    227.39299000000003,
+    174.5103,
+    227.39299000000003,
+  );
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#232323";
+  ctx.fillStyle = "rgba(35, 35, 35, 0.49358975)";
+  ctx.strokeStyle = "rgba(0,0,0,0)";
+  ctx.lineWidth = 0.26458332;
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(52.68043, 224.05058);
+  ctx.lineTo(73.988839, 224.05058);
+  ctx.bezierCurveTo(
+    73.988839,
+    224.05058,
+    73.752603,
+    213.75073,
+    63.499999,
+    213.70349,
+  );
+  ctx.bezierCurveTo(
+    53.247395000000004,
+    213.65628999999998,
+    52.68043,
+    224.05058,
+    52.68043,
+    224.05058,
+  );
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "#232323";
+  ctx.fillStyle = "rgba(35, 35, 35, 0.49358975)";
+  ctx.strokeStyle = "rgba(0,0,0,0)";
+  ctx.lineWidth = 0.26458332;
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(141.05128, 224.05058);
+  ctx.lineTo(162.3597, 224.05058);
+  ctx.bezierCurveTo(
+    162.3597,
+    224.05058,
+    162.12347,
+    213.75073,
+    151.87086,
+    213.70349,
+  );
+  ctx.bezierCurveTo(
+    141.61825,
+    213.65628999999998,
+    141.05128,
+    224.05058,
+    141.05128,
+    224.05058,
+  );
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "rgba(0,0,0,0)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(66.760042, 205.02185);
+  ctx.lineTo(77.57498, 223.16679);
+  ctx.bezierCurveTo(
+    77.57498,
+    223.16679,
+    79.71313599999999,
+    226.07335,
+    81.11630099999999,
+    226.14015999999998,
+  );
+  ctx.bezierCurveTo(
+    82.519466,
+    226.20695999999998,
+    98.08482099999999,
+    226.36569999999998,
+    98.08482099999999,
+    226.36569999999998,
+  );
+  ctx.lineTo(97.70684599999998, 212.19158999999996);
+  ctx.bezierCurveTo(
+    97.70684599999998,
+    212.19158999999996,
+    97.42336299999998,
+    209.64024999999995,
+    97.23437399999999,
+    208.22283999999996,
+  );
+  ctx.bezierCurveTo(
+    97.04538699999999,
+    206.80542999999997,
+    94.09244699999999,
+    194.14322999999996,
+    94.09244699999999,
+    194.14322999999996,
+  );
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "rgba(0,0,0,0)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(98.084819, 226.3657);
+  ctx.lineTo(139.98241, 227.10901);
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+  ctx.save();
+  ctx.fillStyle = "rgba(0,0,0,0)";
+  ctx.strokeStyle = "#434343";
+  ctx.strokeStyle = "rgba(67, 67, 67, 1)";
+  ctx.lineWidth = 0.13229167;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.miterLimit = "4";
+  ctx.font = "  400 15px ''";
+  ctx.beginPath();
+  ctx.moveTo(128.12233, 206.86335);
+  ctx.bezierCurveTo(
+    128.12233,
+    206.86335,
+    131.29615,
+    210.3271,
+    131.29615,
+    212.19799,
+  );
+  ctx.bezierCurveTo(
+    131.29615,
+    214.06888,
+    130.42541,
+    226.92085,
+    130.42541,
+    226.92085,
+  );
+  ctx.fill();
+  ctx.stroke();
+  ctx.restore();
+
+  ctx.restore();
+}
+
+
+/**
  * Dessine une voiture vu de derrière.
  * @param {object} ctx - Context canvas 2D
  * @param {boolean} flash - Rear lights On/Off
