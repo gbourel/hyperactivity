@@ -8,6 +8,7 @@ TODO, voir JSDOC pour l'instant (`npm run doc`).
 
 L'outil utilisé est [Parcel](https://parceljs.org/) :
 
+ - demo : `npm run start:demo`
  - pour le développement : `npm start`
  - pour la distribution : `npm run build`
 

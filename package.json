@@ -12,7 +12,8 @@
   "scripts": {
     "build": "npm run doc && npx parcel build src/index.html",
     "doc": "jsdoc -c jsdoc.json",
-    "start": "npx parcel src/demo.html"
+    "start": "npx parcel src/index.html",
+    "start:demo": "npx parcel src/demo.html"
   },
   "dependencies": {
   }
