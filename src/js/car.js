@@ -3,7 +3,7 @@
  * @param {object} ctx - Contexte canvas 2D
  * @param {string} color - car color (defaults to blue, #1243A5)
  */
-export function draw_car_top(ctx, color='#1243A5') {
+export function draw_car_top(ctx, color = "#1243A5") {
   ctx.save();
   ctx.strokeStyle = "rgba(0,0,0,0)";
   ctx.scale(0.25641025641025644, 0.25641025641025644);
@@ -556,7 +556,7 @@ export function draw_car_top(ctx, color='#1243A5') {
  * @param {boolean} flash - Rear lights On/Off
  * @param {string} color - car color (defaults to blue, #1243A5)
  */
-export function draw_car_back(ctx, flash, color='#1243A5') {
+export function draw_car_back(ctx, flash, color = "#1243A5") {
   ctx.save();
   ctx.strokeStyle = "rgba(0,0,0,0)";
   ctx.scale(0.29850746268656714, 0.29850746268656714);

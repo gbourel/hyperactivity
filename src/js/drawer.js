@@ -1,5 +1,4 @@
-
-import { saturate } from './matrix.js';
+import { saturate } from "./matrix.js";
 
 const SCALE = Math.min(2, window.devicePixelRatio || 1);
 
@@ -10,7 +9,6 @@ const fill2 = "#5EAAD4";
 const fill3 = "#D45E5E";
 const stroke0 = "#555";
 
-
 /**
  * Affiche un canvas dont la fonction de dessin est passée en paramètre.
  * @constructor
@@ -19,7 +17,7 @@ const stroke0 = "#555";
  * @param {Object} state - JSON object qui décrit l'état du modèle affiché.
  * @param {Object} options - JSON object qui décrit les paramètres de l'afficheur.
  */
-export function Drawer(container, paint, state, options = { 'playable': true }) {
+export function Drawer(container, paint, state, options = { playable: true }) {
   var self = this;
   self.paint = paint;
 
@@ -145,345 +143,356 @@ export function Drawer(container, paint, state, options = { 'playable': true }) 
   window.addEventListener("load", this.on_resize, true);
 }
 
+export function Slider(
+  container_div,
+  callback,
+  style_prefix,
+  default_value,
+  disable_click,
+) {
+  let container = document.createElement("div");
+  container.style.width = "100%";
+  container.style.height = "0";
+  container.style.position = "relative";
+  container.classList.add("slider_container");
+  if (style_prefix) container.classList.add(style_prefix + "slider_container");
 
-export function Slider(container_div, callback, style_prefix, default_value, disable_click) {
-    let container = document.createElement("div");
-    container.style.width = "100%";
-    container.style.height = "0";
-    container.style.position = "relative";
-    container.classList.add("slider_container");
-    if (style_prefix)
-        container.classList.add(style_prefix + "slider_container");
+  let left_gutter = document.createElement("div");
+  left_gutter.classList.add("slider_left_gutter");
+  if (style_prefix)
+    left_gutter.classList.add(style_prefix + "slider_left_gutter");
 
-    let left_gutter = document.createElement("div");
-    left_gutter.classList.add("slider_left_gutter");
-    if (style_prefix)
-        left_gutter.classList.add(style_prefix + "slider_left_gutter");
+  let right_gutter = document.createElement("div");
+  right_gutter.classList.add("slider_right_gutter");
+  if (style_prefix)
+    right_gutter.classList.add(style_prefix + "slider_right_gutter");
 
-    let right_gutter = document.createElement("div");
-    right_gutter.classList.add("slider_right_gutter");
-    if (style_prefix)
-        right_gutter.classList.add(style_prefix + "slider_right_gutter");
+  if (!disable_click) {
+    left_gutter.onclick = mouse_click;
+    right_gutter.onclick = mouse_click;
+  }
 
-    if (!disable_click) {
-        left_gutter.onclick = mouse_click;
-        right_gutter.onclick = mouse_click;
-    }
+  let knob_container = document.createElement("div");
+  knob_container.style.width = "0";
+  knob_container.style.height = "0";
+  knob_container.style.top = "0";
+  knob_container.style.position = "absolute";
 
-    let knob_container = document.createElement("div");
-    knob_container.style.width = "0";
-    knob_container.style.height = "0";
-    knob_container.style.top = "0"
-    knob_container.style.position = "absolute";
+  let knob = document.createElement("div");
+  knob.classList.add("slider_knob");
+  if (style_prefix) knob.classList.add(style_prefix + "slider_knob");
 
-    let knob = document.createElement("div");
-    knob.classList.add("slider_knob");
-    if (style_prefix)
-        knob.classList.add(style_prefix + "slider_knob");
+  container_div.appendChild(container);
+  container.appendChild(left_gutter);
+  container.appendChild(right_gutter);
+  container.appendChild(knob_container);
+  knob_container.appendChild(knob);
 
+  window.addEventListener("resize", layout, true);
+  window.addEventListener("load", layout, true);
 
+  this.dragged = false;
+  let self = this;
 
-    container_div.appendChild(container);
-    container.appendChild(left_gutter);
-    container.appendChild(right_gutter);
-    container.appendChild(knob_container);
-    knob_container.appendChild(knob);
+  let percentage = default_value === undefined ? 0.5 : default_value;
 
-    window.addEventListener("resize", layout, true);
-    window.addEventListener("load", layout, true);
+  layout();
+  callback(percentage);
 
-    this.dragged = false;
-    let self = this;
-
-    let percentage = default_value === undefined ? 0.5 : default_value;
-
+  this.set_value = function (p) {
+    percentage = p;
     layout();
-    callback(percentage);
+  };
 
-    this.set_value = function(p) {
+  this.knob_div = function () {
+    return knob;
+  };
+
+  function layout() {
+    let width = container.getBoundingClientRect().width;
+
+    left_gutter.style.width = width * percentage + "px";
+    left_gutter.style.left = "0";
+
+    right_gutter.style.width = width * (1.0 - percentage) + "px";
+    right_gutter.style.left = width * percentage + "px";
+
+    knob_container.style.left = width * percentage + "px";
+  }
+
+  let selection_offset;
+
+  new TouchHandler(
+    knob,
+    function (e) {
+      if (window.bc_touch_down_state) return false;
+
+      e == e || window.event;
+      let knob_rect = knob_container.getBoundingClientRect();
+      selection_offset = e.clientX - knob_rect.left - knob_rect.width / 2;
+
+      self.dragged = true;
+
+      return true;
+    },
+    function (e) {
+      let container_rect = container.getBoundingClientRect();
+      let x = e.clientX - selection_offset - container_rect.left;
+
+      let p = saturate(x / container_rect.width);
+
+      if (percentage != p) {
         percentage = p;
         layout();
+        callback(p);
+      }
+
+      return true;
+    },
+    function (e) {
+      self.dragged = false;
+    },
+  );
+
+  function mouse_click(e) {
+    let container_rect = container.getBoundingClientRect();
+    let x = e.clientX - container_rect.left;
+
+    let p = Math.max(0, Math.min(1.0, x / container_rect.width));
+
+    if (percentage != p) {
+      percentage = p;
+      layout();
+      callback(p);
     }
 
-    this.knob_div = function() {
-        return knob;
-    }
-
-    function layout() {
-        let width = container.getBoundingClientRect().width;
-
-        left_gutter.style.width = width * percentage + "px";
-        left_gutter.style.left = "0";
-
-        right_gutter.style.width = (width * (1.0 - percentage)) + "px";
-        right_gutter.style.left = width * percentage + "px";
-
-        knob_container.style.left = (width * percentage) + "px"
-    }
-
-    let selection_offset;
-
-    new TouchHandler(knob,
-        function(e) {
-            if (window.bc_touch_down_state)
-                return false;
-
-            e == e || window.event;
-            let knob_rect = knob_container.getBoundingClientRect();
-            selection_offset = e.clientX - knob_rect.left - knob_rect.width / 2;
-
-            self.dragged = true;
-
-            return true;
-        },
-        function(e) {
-            let container_rect = container.getBoundingClientRect();
-            let x = e.clientX - selection_offset - container_rect.left;
-
-            let p = saturate(x / container_rect.width);
-
-            if (percentage != p) {
-                percentage = p;
-                layout();
-                callback(p);
-            }
-
-            return true;
-        },
-        function(e) {
-            self.dragged = false;
-
-        });
-
-
-    function mouse_click(e) {
-        let container_rect = container.getBoundingClientRect();
-        let x = e.clientX - container_rect.left;
-
-        let p = Math.max(0, Math.min(1.0, x / container_rect.width));
-
-        if (percentage != p) {
-            percentage = p;
-            layout();
-            callback(p);
-        }
-
-        return true;
-    }
+    return true;
+  }
 }
-
 
 function TouchHandler(target, begin, move, end) {
+  target.addEventListener("mousedown", mouse_down, false);
 
-    target.addEventListener("mousedown", mouse_down, false);
+  function mouse_down(e) {
+    window.addEventListener("mousemove", mouse_move, false);
+    window.addEventListener("mouseup", mouse_up, false);
 
-    function mouse_down(e) {
-        window.addEventListener("mousemove", mouse_move, false);
-        window.addEventListener("mouseup", mouse_up, false);
+    let res = begin ? begin(e) : true;
 
-        let res = begin ? begin(e) : true;
+    if (res && e.preventDefault) e.preventDefault();
+    return res;
+  }
 
-        if (res && e.preventDefault)
-            e.preventDefault();
-        return res;
+  function mouse_move(e) {
+    return move ? move(e) : true;
+  }
+
+  function mouse_up(e) {
+    window.removeEventListener("mousemove", mouse_move, false);
+    window.removeEventListener("mouseup", mouse_up, false);
+
+    return end ? end(e) : true;
+  }
+
+  target.addEventListener("touchstart", touch_down, false);
+
+  let identifier;
+
+  function touch_down(e) {
+    if (!identifier) {
+      window.addEventListener("touchmove", touch_move, false);
+      window.addEventListener("touchend", touch_end, false);
+      window.addEventListener("touchcancel", touch_end, false);
+      let touch = e.changedTouches[0];
+
+      identifier = touch.identifier;
+      touch.timeStamp = e.timeStamp;
+
+      let res = begin ? begin(touch) : true;
+
+      if (res && e.preventDefault) e.preventDefault();
+      return res;
+    }
+    return false;
+  }
+
+  function touch_move(e) {
+    if (!move) return true;
+
+    for (let i = 0; i < e.changedTouches.length; i++) {
+      let touch = e.changedTouches[i];
+
+      if (touch.identifier == identifier) {
+        touch.timeStamp = e.timeStamp;
+
+        return move(touch);
+      }
+    }
+  }
+
+  function touch_end(e) {
+    for (let i = 0; i < e.changedTouches.length; i++) {
+      let touch = e.changedTouches[i];
+
+      if (touch.identifier == identifier) {
+        touch.timeStamp = e.timeStamp;
+
+        identifier = undefined;
+
+        window.removeEventListener("touchmove", touch_move, false);
+        window.removeEventListener("touchend", touch_end, false);
+        window.removeEventListener("touchcancel", touch_end, false);
+        return end ? end(touch) : true;
+      }
     }
 
-    function mouse_move(e) {
-        return move ? move(e) : true;
-    }
-
-    function mouse_up(e) {
-        window.removeEventListener("mousemove", mouse_move, false);
-        window.removeEventListener("mouseup", mouse_up, false);
-
-        return end ? end(e) : true;
-    }
-
-
-
-    target.addEventListener("touchstart", touch_down, false);
-
-
-    let identifier;
-
-    function touch_down(e) {
-
-
-        if (!identifier) {
-            window.addEventListener("touchmove", touch_move, false);
-            window.addEventListener("touchend", touch_end, false);
-            window.addEventListener("touchcancel", touch_end, false);
-            let touch = e.changedTouches[0];
-
-            identifier = touch.identifier;
-            touch.timeStamp = e.timeStamp;
-
-            let res = begin ? begin(touch) : true;
-
-            if (res && e.preventDefault)
-                e.preventDefault();
-            return res;
-        }
-        return false;
-
-
-
-    }
-
-    function touch_move(e) {
-
-        if (!move)
-            return true;
-
-        for (let i = 0; i < e.changedTouches.length; i++) {
-
-            let touch = e.changedTouches[i];
-
-            if (touch.identifier == identifier) {
-                touch.timeStamp = e.timeStamp;
-
-                return move(touch);
-            }
-        }
-    }
-
-
-    function touch_end(e) {
-
-        for (let i = 0; i < e.changedTouches.length; i++) {
-            let touch = e.changedTouches[i];
-
-            if (touch.identifier == identifier) {
-                touch.timeStamp = e.timeStamp;
-
-                identifier = undefined;
-
-                window.removeEventListener("touchmove", touch_move, false);
-                window.removeEventListener("touchend", touch_end, false);
-                window.removeEventListener("touchcancel", touch_end, false);
-                return end ? end(touch) : true;
-            }
-        }
-
-
-        return true;
-    }
+    return true;
+  }
 }
 
+CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+  if (w < 2 * r) r = w / 2;
+  if (h < 2 * r) r = h / 2;
+  this.beginPath();
+  this.moveTo(x + r, y);
+  this.arcTo(x + w, y, x + w, y + h, r);
+  this.arcTo(x + w, y + h, x, y + h, r);
+  this.arcTo(x, y + h, x, y, r);
+  this.arcTo(x, y, x + w, y, r);
+  this.closePath();
+  return this;
+};
+CanvasRenderingContext2D.prototype.fillEllipse = function (x, y, r) {
+  this.beginPath();
+  this.ellipse(x, y, r, r, 0, 0, Math.PI * 2);
+  this.fill();
+};
 
+CanvasRenderingContext2D.prototype.strokeEllipse = function (x, y, r) {
+  this.beginPath();
+  this.ellipse(x, y, r, r, 0, 0, Math.PI * 2);
+  this.stroke();
+};
 
-CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
-    if (w < 2 * r) r = w / 2;
-    if (h < 2 * r) r = h / 2;
-    this.beginPath();
-    this.moveTo(x + r, y);
-    this.arcTo(x + w, y, x + w, y + h, r);
-    this.arcTo(x + w, y + h, x, y + h, r);
-    this.arcTo(x, y + h, x, y, r);
-    this.arcTo(x, y, x + w, y, r);
-    this.closePath();
-    return this;
-}
-CanvasRenderingContext2D.prototype.fillEllipse = function(x, y, r) {
-    this.beginPath();
-    this.ellipse(x, y, r, r, 0, 0, Math.PI * 2);
-    this.fill();
-}
+CanvasRenderingContext2D.prototype.strokeLine = function (x0, y0, x1, y1) {
+  this.beginPath();
+  this.lineTo(x0, y0);
+  this.lineTo(x1, y1);
+  this.stroke();
+};
 
-CanvasRenderingContext2D.prototype.strokeEllipse = function(x, y, r) {
-    this.beginPath();
-    this.ellipse(x, y, r, r, 0, 0, Math.PI * 2);
-    this.stroke();
-}
+CanvasRenderingContext2D.prototype.arrow = function (
+  x0,
+  y0,
+  x1,
+  y1,
+  w,
+  arrw,
+  arrh,
+) {
+  let dx = x1 - x0;
+  let dy = y1 - y0;
 
-CanvasRenderingContext2D.prototype.strokeLine = function(x0, y0, x1, y1) {
-    this.beginPath();
-    this.lineTo(x0, y0);
-    this.lineTo(x1, y1);
-    this.stroke();
-}
+  let l = 1.0 / Math.sqrt(dx * dx + dy * dy);
+  dx *= l;
+  dy *= l;
 
-CanvasRenderingContext2D.prototype.arrow = function(x0, y0, x1, y1, w, arrw, arrh) {
-    let dx = x1 - x0;
-    let dy = y1 - y0;
+  this.beginPath();
+  this.moveTo(x0 - (dy * w) / 2, y0 + (dx * w) / 2);
+  this.lineTo(x1 - (dy * w) / 2 - dx * arrh, y1 + (dx * w) / 2 - dy * arrh);
+  this.lineTo(
+    x1 - (dy * arrw) / 2 - dx * arrh,
+    y1 + (dx * arrw) / 2 - dy * arrh,
+  );
+  this.lineTo(x1, y1);
+  this.lineTo(
+    x1 + (dy * arrw) / 2 - dx * arrh,
+    y1 - (dx * arrw) / 2 - dy * arrh,
+  );
+  this.lineTo(x1 + (dy * w) / 2 - dx * arrh, y1 - (dx * w) / 2 - dy * arrh);
+  this.lineTo(x0 + (dy * w) / 2, y0 - (dx * w) / 2);
 
-    let l = 1.0 / Math.sqrt(dx * dx + dy * dy);
-    dx *= l;
-    dy *= l;
+  this.closePath();
+  return this;
+};
 
-    this.beginPath();
-    this.moveTo(x0 - dy * w / 2, y0 + dx * w / 2);
-    this.lineTo(x1 - dy * w / 2 - dx * arrh, y1 + dx * w / 2 - dy * arrh);
-    this.lineTo(x1 - dy * arrw / 2 - dx * arrh, y1 + dx * arrw / 2 - dy * arrh);
-    this.lineTo(x1, y1);
-    this.lineTo(x1 + dy * arrw / 2 - dx * arrh, y1 - dx * arrw / 2 - dy * arrh);
-    this.lineTo(x1 + dy * w / 2 - dx * arrh, y1 - dx * w / 2 - dy * arrh);
-    this.lineTo(x0 + dy * w / 2, y0 - dx * w / 2);
+CanvasRenderingContext2D.prototype.feather = function (
+  w,
+  h,
+  l,
+  r,
+  t,
+  b,
+  tx,
+  ty,
+) {
+  this.save();
+  this.resetTransform();
+  this.globalAlpha = 1;
 
-    this.closePath();
-    return this;
-}
+  if (tx !== undefined && ty !== undefined) this.translate(tx, ty);
 
-CanvasRenderingContext2D.prototype.feather = function(w, h, l, r, t, b, tx, ty) {
-    this.save();
-    this.resetTransform();
-    this.globalAlpha = 1;
+  this.globalCompositeOperation = "destination-out";
 
-    if (tx !== undefined && ty !== undefined)
-        this.translate(tx, ty);
+  let grd;
+  let n = 10;
 
-    this.globalCompositeOperation = "destination-out";
-
-    let grd;
-    let n = 10;
-
-    if (t) {
-        grd = this.createLinearGradient(0, 0, 0, t);
-        for (let i = 0; i <= n; i++) {
-            let t = i / n;
-            grd.addColorStop(1 - t, "rgba(0,0,0," + ((t * t * t) + 3 * (1 - t) * t * t * t) + ")");
-        }
-
-
-        this.fillStyle = grd;
-        this.fillRect(0, 0, w, t);
+  if (t) {
+    grd = this.createLinearGradient(0, 0, 0, t);
+    for (let i = 0; i <= n; i++) {
+      let t = i / n;
+      grd.addColorStop(
+        1 - t,
+        "rgba(0,0,0," + (t * t * t + 3 * (1 - t) * t * t * t) + ")",
+      );
     }
 
-    if (b) {
-        grd = this.createLinearGradient(0, h - b, 0, h);
-        for (let i = 0; i <= n; i++) {
-            let t = i / n;
-            grd.addColorStop(t, "rgba(0,0,0," + ((t * t * t) + 3 * (1 - t) * t * t * t) + ")");
-        }
+    this.fillStyle = grd;
+    this.fillRect(0, 0, w, t);
+  }
 
-        this.fillStyle = grd;
-        this.fillRect(0, h - b, w, h);
+  if (b) {
+    grd = this.createLinearGradient(0, h - b, 0, h);
+    for (let i = 0; i <= n; i++) {
+      let t = i / n;
+      grd.addColorStop(
+        t,
+        "rgba(0,0,0," + (t * t * t + 3 * (1 - t) * t * t * t) + ")",
+      );
     }
 
-    if (l) {
-        grd = this.createLinearGradient(0, 0, l, 0);
-        for (let i = 0; i <= n; i++) {
-            let t = i / n;
-            grd.addColorStop(1 - t, "rgba(0,0,0," + ((t * t * t) + 3 * (1 - t) * t * t * t) + ")");
-        }
+    this.fillStyle = grd;
+    this.fillRect(0, h - b, w, h);
+  }
 
-
-        this.fillStyle = grd;
-        this.fillRect(0, 0, l, h);
+  if (l) {
+    grd = this.createLinearGradient(0, 0, l, 0);
+    for (let i = 0; i <= n; i++) {
+      let t = i / n;
+      grd.addColorStop(
+        1 - t,
+        "rgba(0,0,0," + (t * t * t + 3 * (1 - t) * t * t * t) + ")",
+      );
     }
 
-    if (r) {
-        grd = this.createLinearGradient(w - r, 0, w, 0);
-        for (let i = 0; i <= n; i++) {
-            let t = i / n;
-            grd.addColorStop(t, "rgba(0,0,0," + ((t * t * t) + 3 * (1 - t) * t * t * t) + ")");
-        }
+    this.fillStyle = grd;
+    this.fillRect(0, 0, l, h);
+  }
 
-
-        this.fillStyle = grd;
-        this.fillRect(w - r, 0, r, h);
+  if (r) {
+    grd = this.createLinearGradient(w - r, 0, w, 0);
+    for (let i = 0; i <= n; i++) {
+      let t = i / n;
+      grd.addColorStop(
+        t,
+        "rgba(0,0,0," + (t * t * t + 3 * (1 - t) * t * t * t) + ")",
+      );
     }
 
-    this.restore();
-}
+    this.fillStyle = grd;
+    this.fillRect(w - r, 0, r, h);
+  }
+
+  this.restore();
+};
 
