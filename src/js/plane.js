@@ -21,13 +21,13 @@ export function draw_plane(ctx, width, height, t, state) {
 }
 
 const clouds = [
-  [30, 300, 0.32],
-  [130, 30, 0.2],
-  [330, 10, 0.5],
-  [550, 90, 0.3],
   [800, 150, 0.15],
+  [130, 30, 0.2],
+  [600, 350, 0.25],
+  [550, 90, 0.3],
+  [30, 300, 0.32],
   [250, 250, 0.4],
-  [600, 350, 0.25] ];
+  [330, 10, 0.5] ];
 const cloudSpeed = 300;
 /**
  * Un avion vue de coté avec un fond bleu et des nuages qui défilent.

@@ -3,18 +3,27 @@
   <head>
     <meta charset="utf-8"/>
     <title>Hyperactivity</title>
-    <link rel="stylesheet" href="css/hyperactivity.css" />
+    <link rel="stylesheet" href="less/hyperactivity.less" />
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script type="module" src="./js/hyperactivity.js"></script>
+    <script type="module" src="./hyperactivity.js"></script>
   </head>
   <body>
     <header>
-      <h1>Home</h1>
     </header>
     <main>
-      <div id="question"></div>
-      <div class="drawer_container" id="plane_drawer"></div>
-      <div id="2d_demo_slider"></div>
+      <div class="question">
+      </div>
     </main>
   </body>
+
+  <template id="question">
+    <h2 class="q-title"></h2>
+    <div class="q-instruction">
+    </div>
+    <div class="q-answers">
+    </div>
+    <div class="q-footer">
+      <button class="valid">Valider</button>
+    </div>
+  </template>
 </html>
