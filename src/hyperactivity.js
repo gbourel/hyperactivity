@@ -1,8 +1,18 @@
+import marked from 'marked';
+import markedKatex from "marked-katex-extension";
 import { Drawer, Slider } from "./js/drawer.js";
 import { draw_plane, draw_movingPlane } from "./js/plane.js";
+import { classy } from "./js/classy.mjs";
 
 // new Drawer(document.getElementById("plane_drawer"), draw_plane);
 // new Drawer(document.getElementById("question"), draw_movingPlane);
+
+const options = {
+  throwOnError: false
+};
+
+marked.use(markedKatex(options));
+marked.use(classy())
 
 const _context = {
   currentQuestion: 0   // current question index (0 based)
@@ -14,7 +24,6 @@ function displayQuestion() {
   const template = document.querySelector("#question");
   const clone = template.content.cloneNode(true);
 
-  // clone.querySelector('.q-title').textContent = 'Pourquoi ?';
   clone.querySelector(".q-instruction").innerHTML = marked.parse(q.instruction);
   const answersElt = document.createElement("ul");
   for (let p of parseProposals(q.proposals)) {
@@ -48,7 +57,11 @@ function parseProposals(proposals) {
 
 const questions = [
   {
-    instruction: "L'avion dessiné ci-dessous est-il en mouvement ?",
+    instruction: "![](https://filedn.com/lodBnQeoCYyQxKkBA3pJTFb/img/prgm-logo.png){ .pull-right width=15%}\n\n" +
+      "L'_avion_ dessiné **ci-dessous** est-il en mouvement ? \n\n" +
+      "Avec $c = \\pm\\sqrt{a^2 + b^2}$ \n\n" +
+      "Et le <strong>html</strong> aussi ici.\n\n" +
+      "<div id=\"test\"></div>\n",
     proposals:
       "- Oui\n- Non\n- On ne sait pas\n",
     type: "QCU",

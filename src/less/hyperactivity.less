@@ -1,20 +1,30 @@
 @import "./base.less";
+@import "./markdown.less";
+
+html, body {
+  background: #242222;
+  color: #eee;
+}
 
 .question {
   .q-instruction {
     padding: 1rem 1rem;
-    background: #C3FFFF;
+    background: #241111;
   }
   .q-answers {
-    background: #FFC3FF;
+    background: #112411;
   }
   .q-answers .answer {
-    padding: 0.5rem 0;
+    padding: 0.5rem 0.5rem;
+
+    &:hover {
+      background: #224822;
+    }
   }
 
   .q-footer {
     padding: 1rem 1rem;
-    background: #FFFFC3;
+    background: #111124;
   }
 }
 
