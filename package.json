@@ -10,7 +10,7 @@
     "jsdoc": "^4.0.0",
     "parcel": "^2.8.2"
   },
-  "browserslist": "10%",
+  "browserslist": "> 5%",
   "scripts": {
     "build": "npm run doc && npx parcel build src/index.html",
     "doc": "jsdoc -c jsdoc.json",
