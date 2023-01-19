@@ -1,30 +1,174 @@
 @import "./base.less";
 @import "./markdown.less";
+@import "./github-corner.less";
+
+// @font-face {
+//   font-family: "OpenDyslexic";
+//   src: url('font/opendyslexic/eot/FiraSans-Regular.eot');
+//   src: url('font/opendyslexic/eot/FiraSans-Regular.eot') format('embedded-opentype'),
+//        url('font/opendyslexic/woff2/FiraSans-Regular.woff2') format('woff2'),
+//        url('font/opendyslexic/woff/FiraSans-Regular.woff') format('woff'),
+//        url('font/opendyslexic/woff2/FiraSans-Regular.ttf') format('truetype');
+// }
 
 html, body {
   background: #242222;
   color: #eee;
 }
 
-.question {
-  .q-instruction {
-    padding: 1rem 1rem;
-    background: #241111;
-  }
-  .q-answers {
-    background: #112411;
-  }
-  .q-answers .answer {
-    padding: 0.5rem 0.5rem;
+main {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
 
-    &:hover {
-      background: #224822;
+button {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #0C8B50;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+
+  &:hover,
+  &:focus {
+    background-color: lighten(#0C8B50, 5%);
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  }
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    background-color: darken(#0C8B50, 10%);
+    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+    transform: translateY(0);
+  }
+}
+
+
+
+.question {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  font-family: "Helvetica Neue", "Arial",  sans-serif;
+
+  .q-title {
+    margin: 0;
+    padding: 1rem 0 1rem 3rem;
+    background: #343333;
+  }
+
+  .q-title::before {
+    content: url('../img/q.svg');
+    position: absolute;
+    top: 14px;
+    left: 12px;
+    width: 2rem;
+  }
+
+  .q-instruction {
+    color: #333;
+    padding: 0rem 1.5rem 2rem 1.5rem;
+    background: #FFF;
+    font-size: 18px;
+    text-align: justify;
+
+    .audio {
+      position: absolute;
+      top: 74px;
+      right: 1.5rem;
+      width: 42px;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      transition: all 150ms;
+
+      &:hover {
+        width: 48px;
+        background: #0C506B40;
+      }
+      &:active {
+        background: #0C506B80;
+      }
+    }
+
+    h3 {
+      color: #0C506B;
+    }
+
+    strong {
+      color: #301F71;
+    }
+  }
+
+  .q-answers {
+    margin: 0;
+    padding: 0;
+    background: #343333;
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      padding: 0 1rem;
+      font-size: 20px;
+
+      li.answer {
+        list-style-type: none;
+        margin: 0.5rem 0.5rem;
+        padding: 0.5rem 0.5rem;
+        background: #111;
+
+        &:hover {
+          background: #224822;
+        }
+      }
+    }
+
+    .qroc-answer {
+      padding: 1rem 1rem 0.2rem 1rem;
+
+      input {
+        margin: 0 12px;
+      }
     }
   }
 
   .q-footer {
+    display: flex;
+    justify-content: center;
     padding: 1rem 1rem;
-    background: #111124;
+    background: #343333;
+  }
+
+  .drawer {
+    position: relative;
+    width: 100%;
+    height: 380px;
   }
 }
 
