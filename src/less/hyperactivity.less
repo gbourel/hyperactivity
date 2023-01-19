@@ -1,5 +1,6 @@
 @import "./base.less";
 @import "./markdown.less";
+@import "./buttons.less";
 
 // @font-face {
 //   font-family: "OpenDyslexic";
@@ -23,52 +24,7 @@ main {
   padding-right: 4rem;
 }
 
-button {
-  align-items: center;
-  background-clip: padding-box;
-  background-color: #0C8B50;
-  border: 1px solid transparent;
-  border-radius: .25rem;
-  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  display: inline-flex;
-  font-size: 16px;
-  font-weight: 600;
-  justify-content: center;
-  line-height: 1.25;
-  margin: 0;
-  min-height: 3rem;
-  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
-  position: relative;
-  text-decoration: none;
-  transition: all 250ms;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: baseline;
-  width: auto;
-
-  &:hover,
-  &:focus {
-    background-color: lighten(#0C8B50, 5%);
-    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-  }
-
-  &:hover {
-    transform: translateY(-1px);
-  }
-
-  &:active {
-    background-color: darken(#0C8B50, 10%);
-    box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
-    transform: translateY(0);
-  }
-}
-
-
-
+// Format CSS des questions.
 .question {
   position: relative;
   display: flex;
@@ -136,15 +92,8 @@ button {
       padding: 0 1rem;
       font-size: 20px;
 
-      li.answer {
+      li {
         list-style-type: none;
-        margin: 0.5rem 0.5rem;
-        padding: 0.5rem 0.5rem;
-        background: #111;
-
-        &:hover {
-          background: #224822;
-        }
       }
     }
 

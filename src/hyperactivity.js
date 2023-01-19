@@ -2,6 +2,8 @@ import marked from "marked";
 import markedKatex from "marked-katex-extension";
 import { classy } from "./js/classy.mjs";
 
+const debug = false;
+
 marked.use(markedKatex({ throwOnError: false }));
 marked.use(classy());
 
@@ -13,14 +15,14 @@ window.onpopstate = (evt) => {
   stopAudio();
   _context.currentQuestion = evt.state ? evt.state.question : 0;
   displayQuestion();
-}
+};
 window.onload = () => {
   let m = location.hash.match(/#q(\d+)/);
   if(m){
     _context.currentQuestion = parseInt(m[1])-1;
   }
   displayQuestion();
-}
+};
 
 /**
  * Passe à la question suivant la question courante.
@@ -38,7 +40,7 @@ let audioState = {
   audio: null
 }
 function playAudio(filename) {
-  console.info('play', filename);
+  debug && console.info('[Audio] play', filename);
   if (audioState.playing) {
     stopAudio();
   } else {
@@ -80,6 +82,13 @@ function displayQuestion() {
     mainQuestion.removeChild(mainQuestion.lastChild);
   }
 
+  if(!q) {
+    clone.querySelector(".q-title").innerHTML = title;
+    clone.querySelector(".q-instruction").innerHTML = marked.parse('### Fin\n\n**Bravo !** Toutes les questions sont terminées.');
+    mainQuestion.replaceChildren(clone);
+    return;
+  }
+
   clone.querySelector(".q-title").innerHTML = title || `Question ${_context.currentQuestion + 1} / ${questions.length}`;
   clone.querySelector(".q-instruction").innerHTML = marked.parse(q.instruction);
   if(q.audio) {
@@ -90,21 +99,34 @@ function displayQuestion() {
     clone.querySelector(".q-instruction").appendChild(img);
   }
 
+  /* Choix pour un QCM */
   if(q.type === 'QCU') {
     const answersElt = document.createElement("ul");
-    for (let p of parseQCUProposals(q.proposals)) {
+    const proposals = parseQCUProposals(q.proposals);
+    for (let idx = 0; idx < proposals.length; idx++) {
+      const p = proposals[idx];
       if (p && p.length > 0) {
         const a = document.createElement("li");
-        a.classList.add("answer");
+        a.classList.add("mcq-answer");
         a.textContent = p;
-        a.onclick = nextQuestion;
+        a.onclick = () => {
+          if (parseInt(q.solution) === (idx+1)) {
+            nextQuestion();
+          } else {
+            a.disabled = true;
+            a.classList.add('mistake');
+          }
+        }
         answersElt.appendChild(a);
       }
     }
     clone.querySelector(".q-answers").appendChild(answersElt);
     clone.querySelector(".q-footer").classList.add('hidden');
-  } else if(q.type === 'QROC' || q.type === 'QROCM') {
+  }
+  /* Réponses pour un questionnaire. */
+  else if(q.type === 'QROC' || q.type === 'QROCM') {
     const answersElt = clone.querySelector(".q-answers");
+    const inputs = [];
     for (let p of parseQROCProposals(q.proposals)) {
       if (p && p.length > 0) {
         const answer = document.createElement("div");
@@ -113,13 +135,29 @@ function displayQuestion() {
         label.innerHTML = marked.parseInline(p);
         answer.appendChild(label);
         const input = document.createElement("input");
+        inputs.push(input);
         answer.appendChild(input);
         answersElt.appendChild(answer);
       }
     }
+    const validBtn = clone.querySelector(".q-footer button.valid");
+    validBtn.onclick = () => {
+      let values = q.solution.split(/\s+/);
+      let resolved = true;
+      for (let idx = 0; idx < inputs.length; idx++) {
+        if(inputs[idx].value !== values[idx]) {
+          resolved = false;
+        }
+      }
+      if(resolved) {
+        nextQuestion();
+      } else {
+        validBtn.classList.add('shake');
+        setTimeout(() => { validBtn.classList.remove('shake') }, 800);
+      }
+    }
     clone.querySelector(".q-footer").classList.remove('hidden');
   }
-  clone.querySelector(".q-footer button.valid").onclick = nextQuestion;
 
   mainQuestion.replaceChildren(clone);
 }
@@ -148,7 +186,6 @@ function parseQROCProposals(proposals) {
     if (val && val.startsWith("- ")) {
       val = val.substring(2);
     }
-    console.info(val);
     return val;
   });
 }
@@ -214,9 +251,9 @@ const questions = [
       '<div class="drawer"><animation-drawer type="plane_linear"></animation-drawer></div>\n\n'
       ,
     audio: 'q5.opus',
-    proposals: "Temps de vol : $\\Delta t$ =\n" +
-      "Distance parcourue : $\\Delta x$ =",
-    solution: "3000 50",
+    proposals: "Temps de vol (en secondes) : $\\Delta t$ =\n" +
+      "Distance parcourue (en mètres) : $\\Delta x$ =",
+    solution: "50 3000",
     type: "QROCM",
   },
   {
