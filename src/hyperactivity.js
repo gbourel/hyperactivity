@@ -198,7 +198,7 @@ const questions = [
       "Par lecture graphique, déterminer à quel **instant t** le planeur touche le sol dans cet exemple ?" +
       '<div class="drawer"><animation-drawer type="time_plot"></animation-drawer></div>\n\n',
     audio: 'q4.opus',
-    proposals: "- 0s\n- 1,2s\n- 2,5s\n- 5,2s\n- 10,8s\n- 11,2s\n-14s\n- 15s",
+    proposals: "- 0s\n- 1,2s\n- 2,5s\n- 5,2s\n- 10,8s\n- 11,2s\n- 14s\n- 15s",
     solution: "5",
     type: "QCU",
   },
@@ -211,10 +211,6 @@ const questions = [
       "Avec:\n" +
       " * $\\Delta x$ : la différence de position entre le début et la fin (en mètres)\n" +
       " * $\\Delta t$ : la différence de temps entre le début et la fin (en secondes)\n\n" +
-      // "![](https://filedn.com/lodBnQeoCYyQxKkBA3pJTFb/img/planeur.jpg){width=128px .pull-right}\n\n" +
-      // "Le **chronogramme** ci-dessous représente l'altitude d'un planeur léger lancé à la main.\n\n" +
-      // "Une fois lancé le planeur prends de l'altitude grâce à **l'énergie cinétique** obtenue lors du lancé, plane un moment puis retombe au sol.\n\n" +
-      // "Par lecture graphique, déterminer à quel **instant t** le planeur touche le sol dans cet exemple ?" +
       '<div class="drawer"><animation-drawer type="plane_linear"></animation-drawer></div>\n\n'
       ,
     audio: 'q5.opus',
