@@ -44,6 +44,13 @@ export function classy(options) {
         }
         token.text = ''; // remove text content
       }
+    } else if (token.type === 'text' && last.type === 'inlineKatex') {
+      // let content = token.text.substring(1, token.text.length-1);
+      // let options = content.split(/\s/);
+      // console.info(token, last)
+      // for (let opt of options) {
+      //   console.info(opt);
+      // }
     }
     last = token;
   }
